@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../release/angular-responsive-tables.js"></script>
+    <script src="controller.js"></script>
+    <link rel="stylesheet" href="../src/style.css">
+</head>
+<body ng-controller="TestController as ctrl">
+    <h1>Angular Responsive Tables</h1>
+    
+    <h2>Static table</h2>
+    <table wt-responsive-table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Version</th>
+                <th>Language</th>
+                <th>Maintainer</th>
+                <th>Stars</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AngularJS</td>
+                <td>1.5</td>
+                <td>JavaScript</td>
+                <td>Google</td>
+                <td>35000</td>
+            </tr>
+            <tr>
+                <td>Bootstrap</td>
+                <td>3.3</td>
+                <td>CSS</td>
+                <td>Twitter</td>
+                <td>23000</td>
+            </tr>
+            <tr>
+                <td>UI-Router</td>
+                <td>0.13</td>
+                <td>JavaScript</td>
+                <td>AngularUI</td>
+                <td>15000</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h2>Simple table with ng-repeat</h2>
+    <table wt-responsive-table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Version</th>
+                <th>Language</th>
+                <th>Maintainer</th>
+                <th>Stars</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in ctrl.projects">
+                <td>{{item.name}}</td>
+                <td>{{item.version}}</td>
+                <td>{{item.language}}</td>
+                <td>{{item.maintainer}}</td>
+                <td>{{item.stars}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Simple table with no thead, tbody</h2>
+    <table wt-responsive-table>
+        <tr>
+            <th>Name</th>
+            <th>Version</th>
+            <th>Language</th>
+            <th>Maintainer</th>
+            <th>Stars</th>
+        </tr>
+        <tr ng-repeat="item in ctrl.projects">
+            <td>{{item.name}}</td>
+            <td>{{item.version}}</td>
+            <td>{{item.language}}</td>
+            <td>{{item.maintainer}}</td>
+            <td>{{item.stars}}</td>
+        </tr>
+    </table>
+</body>
+</html>
