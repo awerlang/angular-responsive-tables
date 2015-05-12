@@ -69,12 +69,6 @@ All this work is based on the following assumptions:
         </tr>
     </table>
 
-## Configuration
-
-    app.config(function (easyMaskProvider) {
-        easyMaskProvider.publishMask('myId', '999.999.999-99');
-    });
-    
 ### Directives
 
 #### wt-responsive-table

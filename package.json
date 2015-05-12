@@ -1,0 +1,38 @@
+{
+  "name": "angular-responsive-tables",
+  "version": "0.1.0",
+  "description": "Make your HTML tables look great on every device",
+  "main": "release/angular-responsive-tables.js",
+  "scripts": {
+    "build": "./node_modules/.bin/uglifyjs src/directive.js src/module.js -b -e --preamble \"// https://github.com/awerlang/angular-responsive-tables\" -o release/angular-responsive-tables.js",
+    "release": "./node_modules/.bin/uglifyjs src/directive.js src/module.js -c -e --preamble \"// https://github.com/awerlang/angular-responsive-tables\" -o release/angular-responsive-tables.min.js",
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/awerlang/angular-responsive-tables.git"
+  },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "table",
+    "tables",
+    "responsive",
+    "adaptive",
+    "mobile"
+  ],
+  "author": "André Werlang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/awerlang/angular-responsive-tables/issues"
+  },
+  "homepage": "https://github.com/awerlang/angular-responsive-tables",
+  "devDependencies": {
+    "conventional-changelog": "0.0.17",
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.8",
+    "karma-jasmine": "^0.3.5",
+    "uglify-js": "^2.4.20"
+  }
+}
