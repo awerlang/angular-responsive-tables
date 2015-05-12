@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Angular-responsive-tables by awerlang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Angular-responsive-tables</h1>
+      <h2 class="project-tagline">Make your HTML tables look great on every device</h2>
+      <a href="https://github.com/awerlang/angular-responsive-tables" class="btn">View on GitHub</a>
+      <a href="https://github.com/awerlang/angular-responsive-tables/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/awerlang/angular-responsive-tables/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="angular-responsive-tables" class="anchor" href="#angular-responsive-tables" aria-hidden="true"><span class="octicon octicon-link"></span></a>angular-responsive-tables</h1>
+
+<p>Make your HTML tables look great on every device. 
+Compatible with <strong>AngularJS 1.3.4+</strong>. </p>
+
+<p><a href="http://awerlang.github.io/angular-responsive-tables/examples/">Live Demo</a></p>
+
+<h2>
+<a id="why" class="anchor" href="#why" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why?</h2>
+
+<p>Currently, browsers for mobile devices like smartphones doesn't do anything to have a proper presentation of tables,
+ and then scrollbars will show up and ruin your design.</p>
+
+<p>In the search of a solution to this problem I have found many different approaches. Some of them
+ still rely on horizontal scrollbars. While I believe this layout could be useful for some use cases, 
+ I felt that a default solution should avoid horizontal scrollbars entirely. Then I came up with this
+ highly reusable directive.</p>
+
+<p>All this work is based on the following assumptions:</p>
+
+<ul>
+<li>If it is <em>flexible</em>, then it would solve most problems, even ones not aimed by the library author's;</li>
+<li>Focusing on the task of <em>adding responsiveness</em>, in order to accomplish a greater objective (<em>easy to use tabular data</em>);</li>
+<li>Do work with a <em>standard HTML table</em>, not requiring any extraneous markup;</li>
+<li>Do <em>not change default tabular layout</em> unless a smaller display is detected;</li>
+<li>Provide <em>convenience</em> without sacrificing flexibility;</li>
+<li>By keeping <em>code base simple</em>, it is easier to reason about and evolve;</li>
+<li>By fully covering with tests, it can <em>evolve without introducing bugs</em>.</li>
+</ul>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Angular native implementation compatible with 1.3.4+;</li>
+<li>Keep things DRY;</li>
+<li>Easy to apply any style on top of it;</li>
+<li>Works with any base CSS framework; </li>
+<li>Should integrate seamlessly with any table component you might choose to use.</li>
+</ul>
+
+<h3>
+<a id="future-work" class="anchor" href="#future-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Future Work</h3>
+
+<ul>
+<li>Choose what columns to show/hide according to a given screen resolution;</li>
+<li>Choose when it would be best to hide columns or collapse all columns;</li>
+<li>Define a header and/or custom template for collapsed columns/row;</li>
+<li>Allow collapse/expand column details. </li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<pre><code>&lt;table wt-responsive-table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Column 1&lt;/th&gt;
+        &lt;th&gt;Column 2&lt;/th&gt;
+        &lt;th&gt;Column 3&lt;/th&gt;
+        &lt;th&gt;Column 4&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+        &lt;td&gt;...&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+<h3>
+<a id="directives" class="anchor" href="#directives" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directives</h3>
+
+<h4>
+<a id="wt-responsive-table" class="anchor" href="#wt-responsive-table" aria-hidden="true"><span class="octicon octicon-link"></span></a>wt-responsive-table</h4>
+
+<ul>
+<li>wt-responsive-tables </li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="bower" class="anchor" href="#bower" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bower</h3>
+
+<pre><code>bower install angular-responsive-tables --save
+</code></pre>
+
+<h3>
+<a id="application" class="anchor" href="#application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application</h3>
+
+<h4>
+<a id="html" class="anchor" href="#html" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML</h4>
+
+<pre><code>&lt;script type="text/javascript" src="release/angular-responsive-tables.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<h4>
+<a id="javascript" class="anchor" href="#javascript" aria-hidden="true"><span class="octicon octicon-link"></span></a>JavaScript</h4>
+
+<pre><code>var app = angular.module('app', ['wt.responsive']);
+</code></pre>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/awerlang/angular-responsive-tables">Angular-responsive-tables</a> is maintained by <a href="https://github.com/awerlang">awerlang</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
