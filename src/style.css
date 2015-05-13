@@ -28,7 +28,7 @@
             border: 1px solid #ccc;
         }
 
-    .responsive td {
+    .responsive td, .table.responsive td {
         /* Behave  like a "row" */
         border: none;
         border-bottom: 1px solid #eee;

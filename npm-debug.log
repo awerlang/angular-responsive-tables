@@ -1,0 +1,30 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'build' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
+6 info prebuild angular-responsive-tables@0.1.0
+7 info build angular-responsive-tables@0.1.0
+8 verbose unsafe-perm in lifecycle true
+9 info angular-responsive-tables@0.1.0 Failed to exec build script
+10 error angular-responsive-tables@0.1.0 build: `uglifyjs src/directive.js src/module.js -b -e --preamble "// https://github.com/awerlang/angular-responsive-tables" -o release/angular-responsive-tables.js`
+10 error Exit status 8
+11 error Failed at the angular-responsive-tables@0.1.0 build script.
+11 error This is most likely a problem with the angular-responsive-tables package,
+11 error not with npm itself.
+11 error Tell the author that this fails on your system:
+11 error     uglifyjs src/directive.js src/module.js -b -e --preamble "// https://github.com/awerlang/angular-responsive-tables" -o release/angular-responsive-tables.js
+11 error You can get their info via:
+11 error     npm owner ls angular-responsive-tables
+11 error There is likely additional logging output above.
+12 error System Windows_NT 6.2.9200
+13 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "build"
+14 error cwd e:\src\github\angular-responsive-tables
+15 error node -v v0.10.33
+16 error npm -v 1.4.28
+17 error code ELIFECYCLE
+18 verbose exit [ 1, true ]
