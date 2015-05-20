@@ -6,6 +6,8 @@
   "scripts": {
     "build": "./node_modules/.bin/uglifyjs src/directive.js src/module.js -b -e --preamble \"// https://github.com/awerlang/angular-responsive-tables\" -o release/angular-responsive-tables.js",
     "release": "./node_modules/.bin/uglifyjs src/directive.js src/module.js -c -e --preamble \"// https://github.com/awerlang/angular-responsive-tables\" -o release/angular-responsive-tables.min.js",
+    "css": "type src\\style.css > release\\angular-responsive-tables.css",
+    "cssmin": "type src\\style.css | \"./node_modules/.bin/cleancss\" -o release\\angular-responsive-tables.min.css",
     "test": "karma start"
   },
   "repository": {
@@ -28,6 +30,7 @@
   },
   "homepage": "https://github.com/awerlang/angular-responsive-tables",
   "devDependencies": {
+    "clean-css": "^3.2.10",
     "conventional-changelog": "0.0.17",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",
