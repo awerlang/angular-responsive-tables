@@ -28,7 +28,7 @@
             border: 1px solid #ccc;
         }
 
-    .responsive td {
+    .responsive td:nth-child(odd), .responsive td:nth-child(even) {
         /* Behave  like a "row" */
         border: none;
         border-bottom: 1px solid #eee;
