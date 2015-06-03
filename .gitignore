@@ -1,4 +1,5 @@
 .idea/
 bower_components/
 node_modules/
+typings/
 commit.txt

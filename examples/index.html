@@ -87,7 +87,31 @@
             <td>{{item.stars}}</td>
         </tr>
     </table>
-    
+
+    <h3>Simple table with colspan</h3>
+    <table wt-responsive-table>
+        <thead>
+            <tr>
+                <th>First title</th>
+                <th>Second title</th>
+                <th>Third title</th>
+                <th>Forth title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">This cell spans for 3 columns</td>
+                <td>Forth column</td>
+            </tr>
+            <tr>
+                <td>First column</td>
+                <td>Second column</td>
+                <td>Third column</td>
+                <td>Forth column</td>
+            </tr>
+        </tbody>
+    </table>
+
     <h2>With Bootstrap</h2>
     
     <h3>Static table</h3>

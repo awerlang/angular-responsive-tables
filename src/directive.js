@@ -9,11 +9,15 @@ function wtResponsiveTable() {
             var rows = element[0].querySelectorAll('tbody tr');
             if (headers.length && rows.length) {
                 rows = rows[0];
+                var headerIndex = 0; 
                 Array.prototype.forEach.call(rows.querySelectorAll('td'), function (value, index) {
-                    var title = headers.item(index).textContent;
+                    var title = headers.item(headerIndex).textContent;
                     if (title && !value.getAttributeNode('data-title')) {
                         value.setAttribute('data-title', title);
                     }
+
+                    var colspan = value.getAttributeNode('colspan');
+                    headerIndex += colspan ? parseInt(colspan.value) : 1;
                 });
             }
         }
