@@ -11,24 +11,23 @@
     /* table.responsive,*/
     .responsive thead,
     .responsive tbody,
-    .responsive th,
-    .responsive td,
-    .responsive tr {
+    .responsive tr,
+    .responsive th {
         display: block;
     }
 
-        /* Hide table headers (but not display: none;, for accessibility) */
-        .responsive thead tr {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .responsive thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
 
-        .responsive tr {
-            border: 1px solid #ccc;
-        }
+    .responsive tr {
+        border: 1px solid #ccc;
+    }
 
-    .responsive td, .table.responsive td {
+    .responsive td:nth-child(odd), .responsive td:nth-child(even) {
         /* Behave  like a "row" */
         border: none;
         border-bottom: 1px solid #eee;
@@ -36,9 +35,15 @@
         padding-left: 50%;
         white-space: normal;
         text-align: left;
+
+        display: block;
+        -webkit-box-sizing: content-box;
+           -moz-box-sizing: content-box;
+                box-sizing: content-box;
+        min-height: 1em;
     }
 
-    .responsive td:before {
+    .responsive td:nth-child(odd):before, .responsive td:nth-child(even):before {
         /* Now like a table header */
         position: absolute;
         /* Top/left values mimic padding */
@@ -46,12 +51,25 @@
         left: 6px;
         width: 45%;
         padding-right: 10px;
-        white-space: nowrap;
+        -ms-word-wrap: break-word;
+            word-wrap: break-word;
         text-align: left;
         font-weight: bold;
         /*
         Label the data
         */
         content: attr(data-title);
+    }
+    
+    .responsive td.responsive-omit-title:nth-child(odd), .responsive td.responsive-omit-title:nth-child(even) {
+        padding-left: 6px;
+    }
+
+    .responsive td.responsive-omit-title:before {
+        display: none;
+    }
+
+    .responsive td.responsive-omit-if-empty:empty {
+        display: none;
     }
 }
