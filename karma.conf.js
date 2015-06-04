@@ -18,7 +18,9 @@ module.exports = function(config) {
       'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/bootstrap/dist/css/bootstrap.css',
       'src/**/*.js',
+      'src/**/*.css',
       'tests/**/*.spec.js'
     ],
 
@@ -59,7 +61,17 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['mobile'],
+    
+    customLaunchers: {
+      mobile: {
+        base: "Chrome",
+        flags: ["--window-size=320,600"]
+      },
+      desktop: {
+        base: "Chrome"
+      }
+    },
 
 
     // Continuous Integration mode

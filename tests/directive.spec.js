@@ -82,4 +82,39 @@ describe('directive', function () {
 		expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
 		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
 	});
+
+	fit('supports bootstrap', function () {
+		var markup = [
+		    '<table wt-responsive-table class="table" style="display: none;">',
+		    '    <thead>',
+		    '        <tr>',
+		    '            <th>First title</th>',
+		    '            <th>Second title</th>',
+		    '            <th>Third title</th>',
+		    '            <th>Forth title</th>',
+		    '        </tr>',
+		    '    </thead>',
+		    '    <tbody>',
+		    '        <tr>',
+		    '            <td>First column</td>',
+		    '            <td>Second column</td>',
+		    '            <td>Third column</td>',
+		    '            <td>Forth column</td>',
+		    '        </tr>',
+		    '    </tbody>',
+		    '</table>'
+		].join('');
+		var element = angular.element(markup);
+		angular.element("body").append(element);
+		
+		var firstDataRow = element.find('tbody tr td');
+		
+		var styles = getComputedStyle(firstDataRow[0]);
+		expect(styles.paddingLeft).toBe('8px');
+
+		$compile(element);
+		$rootScope.$digest();
+
+		expect(styles.paddingLeft).toBe('50%');
+	});
 });
