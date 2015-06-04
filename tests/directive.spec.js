@@ -2,13 +2,15 @@
 /// <reference path="../typings/angularjs/angular.d.ts"/>
 /// <reference path="../typings/jasmine/jasmine.d.ts"/>
 describe('directive', function () {
-	var $compile;
+	var $compile,
+		$rootScope;
 	
 	beforeEach(module('wt.responsive'));
-	beforeEach(inject(function (_$compile_) {
+	beforeEach(inject(function (_$rootScope_, _$compile_) {
 		$compile = _$compile_;
+		$rootScope = _$rootScope_;
 	}));
-	
+
 	it('supports colspan', function () {
 		var markup = [
 		    '<table wt-responsive-table>',
@@ -43,5 +45,41 @@ describe('directive', function () {
 
 		expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
 		expect(firstDataRow.eq(1).attr('data-title')).toBe('Forth title');
+	});
+
+	it('supports ng-repeat applied on TR', function () {
+		var markup = [
+		    '<table wt-responsive-table>',
+		    '    <thead>',
+		    '        <tr>',
+		    '            <th>First title</th>',
+		    '            <th>Second title</th>',
+		    '            <th>Third title</th>',
+		    '            <th>Forth title</th>',
+		    '        </tr>',
+		    '    </thead>',
+		    '    <tbody>',
+		    '        <tr ng-repeat="item in rows">',
+		    '            <td>First column</td>',
+		    '            <td>Second column</td>',
+		    '            <td>Third column</td>',
+		    '            <td>Forth column</td>',
+		    '        </tr>',
+		    '    </tbody>',
+		    '</table>'
+		].join('');
+		var element = angular.element(markup);
+		var scope = $rootScope.$new();
+		scope.rows = [0, 1];
+
+		var firstDataRow = element.find('tbody tr:first td');
+		expect(firstDataRow.attr('data-title')).toBeUndefined();
+
+		$compile(element)(scope);
+
+		expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
+		expect(firstDataRow.eq(1).attr('data-title')).toBe('Second title');
+		expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
+		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
 	});
 });
