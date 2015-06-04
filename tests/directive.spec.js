@@ -47,6 +47,47 @@ describe('directive', function () {
 		expect(firstDataRow.eq(1).attr('data-title')).toBe('Forth title');
 	});
 
+	it('support tables with multiple static rows', function () {
+		var markup = [
+		    '<table wt-responsive-table>',
+		    '    <thead>',
+		    '        <tr>',
+		    '            <th>First title</th>',
+		    '            <th>Second title</th>',
+		    '            <th>Third title</th>',
+		    '            <th>Forth title</th>',
+		    '        </tr>',
+		    '    </thead>',
+		    '    <tbody>',
+		    '        <tr>',
+		    '            <td>First column</td>',
+		    '            <td>Second column</td>',
+		    '            <td>Third column</td>',
+		    '            <td>Forth column</td>',
+		    '        </tr>',
+		    '        <tr>',
+		    '            <td>First column</td>',
+		    '            <td>Second column</td>',
+		    '            <td>Third column</td>',
+		    '            <td>Forth column</td>',
+		    '        </tr>',
+		    '    </tbody>',
+		    '</table>'
+		].join('');
+		var element = angular.element(markup);
+
+		var rows = element.find('tbody tr');
+
+		$compile(element);
+
+		rows.each(function (index, element) {
+			var titles = Array.prototype.map.call(element.querySelectorAll('td'), function (item) {
+				return item.getAttribute('data-title');
+			});
+			expect(titles).toEqual(['First title', 'Second title', 'Third title', 'Forth title']);
+		});
+	});
+
 	it('supports ng-repeat applied on TR', function () {
 		var markup = [
 		    '<table wt-responsive-table>',
@@ -83,7 +124,7 @@ describe('directive', function () {
 		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
 	});
 
-	fit('supports bootstrap', function () {
+	it('supports bootstrap', function () {
 		var markup = [
 		    '<table wt-responsive-table class="table" style="display: none;">',
 		    '    <thead>',
