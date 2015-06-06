@@ -17,7 +17,7 @@
     }
 
     /* Hide table headers (but not display: none;, for accessibility) */
-    .responsive thead tr {
+    .responsive thead tr, .responsive th {
         position: absolute;
         top: -9999px;
         left: -9999px;

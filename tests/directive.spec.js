@@ -11,6 +11,41 @@ describe('directive', function () {
 		$rootScope = _$rootScope_;
 	}));
 
+	it('supports rows with no <thead>', function () {
+		var markup = [
+		    '<table wt-responsive-table>',
+	    '        <tr>',
+	    '            <th>First title</th>',
+	    '            <th>Second title</th>',
+	    '            <th>Third title</th>',
+	    '            <th>Forth title</th>',
+	    '        </tr>',
+	    '        <tr>',
+	    '            <td>First column</td>',
+	    '            <td>Second column</td>',
+	    '            <td>Third column</td>',
+	    '            <td>Forth column</td>',
+	    '        </tr>',
+		    '</table>'
+		].join('');
+		var element = angular.element(markup);
+		document.body.appendChild(element[0]);
+		$compile(element);
+
+		var firstDataRow = element.find('tr td');
+		expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
+		expect(firstDataRow.eq(1).attr('data-title')).toBe('Second title');
+		expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
+		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
+
+		var headerRow = element.find('tr th');
+		expect(headerRow.eq(0).attr('data-title')).toBeUndefined();
+		expect(headerRow.eq(1).attr('data-title')).toBeUndefined();
+		expect(headerRow.eq(2).attr('data-title')).toBeUndefined();
+		expect(headerRow.eq(3).attr('data-title')).toBeUndefined();
+		expect(headerRow.is(':visible')).toBe(true);
+	});
+
 	it('supports colspan', function () {
 		var markup = [
 		    '<table wt-responsive-table>',
