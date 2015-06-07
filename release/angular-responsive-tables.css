@@ -1,0 +1,75 @@
+/* original: http://css-tricks.com/responsive-data-tables/ */
+
+.responsive {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+@media only screen and (max-width: 800px) {
+
+    /* Force table to not be like tables anymore */
+    /* table.responsive,*/
+    .responsive thead,
+    .responsive tbody,
+    .responsive tr,
+    .responsive th {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .responsive thead tr, .responsive th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .responsive tr {
+        border: 1px solid #ccc;
+    }
+
+    .responsive td:nth-child(odd), .responsive td:nth-child(even) {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align: left;
+
+        display: block;
+        -webkit-box-sizing: content-box;
+           -moz-box-sizing: content-box;
+                box-sizing: content-box;
+        min-height: 1em;
+    }
+
+    .responsive td:nth-child(odd):before, .responsive td:nth-child(even):before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        -ms-word-wrap: break-word;
+            word-wrap: break-word;
+        text-align: left;
+        font-weight: bold;
+        /*
+        Label the data
+        */
+        content: attr(data-title);
+    }
+    
+    .responsive td.responsive-omit-title:nth-child(odd), .responsive td.responsive-omit-title:nth-child(even) {
+        padding-left: 6px;
+    }
+
+    .responsive td.responsive-omit-title:before {
+        display: none;
+    }
+
+    .responsive td.responsive-omit-if-empty:empty {
+        display: none;
+    }
+}

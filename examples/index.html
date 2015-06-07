@@ -5,7 +5,7 @@
     <script src="../release/angular-responsive-tables.js"></script>
     <script src="controller.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" href="../release/angular-responsive-tables.css">
 </head>
 <body ng-controller="TestController as ctrl">
     <h1>Angular Responsive Tables</h1>
@@ -87,7 +87,31 @@
             <td>{{item.stars}}</td>
         </tr>
     </table>
-    
+
+    <h3>Simple table with colspan</h3>
+    <table wt-responsive-table>
+        <thead>
+            <tr>
+                <th>First title</th>
+                <th>Second title</th>
+                <th>Third title</th>
+                <th>Forth title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">This cell spans for 3 columns</td>
+                <td>Forth column</td>
+            </tr>
+            <tr>
+                <td>First column</td>
+                <td>Second column</td>
+                <td>Third column</td>
+                <td>Forth column</td>
+            </tr>
+        </tbody>
+    </table>
+
     <h2>With Bootstrap</h2>
     
     <h3>Static table</h3>

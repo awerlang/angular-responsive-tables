@@ -6,15 +6,19 @@
             restrict: "A",
             compile: function(element, attrs) {
                 attrs.$addClass("responsive");
-                var headers = element[0].querySelectorAll("thead th");
-                var rows = element[0].querySelectorAll("tbody tr");
-                if (headers.length && rows.length) {
-                    rows = rows[0];
-                    Array.prototype.forEach.call(rows.querySelectorAll("td"), function(value, index) {
-                        var title = headers.item(index).textContent;
-                        if (title && !value.getAttributeNode("data-title")) {
-                            value.setAttribute("data-title", title);
-                        }
+                var headers = element[0].querySelectorAll("tr > th");
+                if (headers.length) {
+                    var rows = element[0].querySelectorAll("tbody > tr");
+                    Array.prototype.forEach.call(rows, function(row) {
+                        var headerIndex = 0;
+                        Array.prototype.forEach.call(row.querySelectorAll("td"), function(value, index) {
+                            var title = headers.item(headerIndex).textContent;
+                            if (title && !value.getAttributeNode("data-title")) {
+                                value.setAttribute("data-title", title);
+                            }
+                            var colspan = value.getAttributeNode("colspan");
+                            headerIndex += colspan ? parseInt(colspan.value) : 1;
+                        });
                     });
                 }
             }
