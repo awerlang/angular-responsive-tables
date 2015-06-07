@@ -2,4 +2,5 @@
 bower_components/
 node_modules/
 typings/
+npm-debug.log
 commit.txt
