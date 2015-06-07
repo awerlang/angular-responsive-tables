@@ -21,7 +21,7 @@ module.exports = function(config) {
       'bower_components/bootstrap/dist/css/bootstrap.css',
       'src/**/*.js',
       'src/**/*.css',
-      'tests/**/*.spec.js'
+      'tests/**/*.js'
     ],
 
 
