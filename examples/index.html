@@ -112,6 +112,32 @@
         </tbody>
     </table>
 
+    <h3>Simple table, headers on first column</h3>
+    <table wt-responsive-table>
+        <tbody ng-repeat="item in ctrl.projects">
+            <tr>
+                <th>Name</th>
+                <td>{{item.name}}</td>
+            </tr>
+            <tr>
+                <th>Version</th>
+                <td>{{item.version}}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{item.language}}</td>
+            </tr>
+            <tr>
+                <th>Maintainer</th>
+                <td>{{item.maintainer}}</td>
+            </tr>
+            <tr>
+                <th>Stars</th>
+                <td>{{item.stars}}</td>
+            </tr>
+        </tbody>
+    </table>
+
     <h2>With Bootstrap</h2>
     
     <h3>Static table</h3>
