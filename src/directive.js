@@ -11,7 +11,8 @@ function wtResponsiveTable() {
                 Array.prototype.forEach.call(rows, function(row) {
                     var headerIndex = 0; 
                     Array.prototype.forEach.call(row.querySelectorAll('td'), function (value, index) {
-                        var title = headers.item(headerIndex).textContent;
+                        var th = value.parentElement.querySelector('th') || headers.item(headerIndex); 
+                        var title = th.textContent;
                         if (title && !value.getAttributeNode('data-title')) {
                             value.setAttribute('data-title', title);
                         }
