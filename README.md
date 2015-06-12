@@ -91,6 +91,10 @@ All this work is based on the following assumptions:
 
     var app = angular.module('app', ['wt.responsive']);
 
+## Credits
+
+CSS based on original work by Chris Coyier (http://css-tricks.com/responsive-data-tables/). In this article, he covers approaches to responsive tables. I modified it to work around CSS specificity and to keep things DRY.
+
 ## License
 
 MIT
