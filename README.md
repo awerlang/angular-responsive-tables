@@ -85,6 +85,7 @@ All this work is based on the following assumptions:
 
 #### HTML
 
+    <link rel="stylesheet" href="release/angular-responsive-tables.min.css"></script>
     <script type="text/javascript" src="release/angular-responsive-tables.min.js"></script>
 
 #### JavaScript
