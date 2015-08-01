@@ -29,6 +29,7 @@ All this work is based on the following assumptions:
 
 * Angular native implementation compatible with 1.3.4+;
 * Keep things DRY;
+* Supports static and dynamic (ng-repeat) rows;
 * Easy to apply any style on top of it;
 * Works with any base CSS framework; 
 * Should integrate seamlessly with any table component you might choose to use.
@@ -73,7 +74,9 @@ All this work is based on the following assumptions:
 
 #### wt-responsive-table
 
- * wt-responsive-tables 
+ * table: wt-responsive-table
+   * td: responsive-omit-title: title should be ommited
+   * td: responsive-omit-if-empty: no row for empty cells
 
 ## Installation
 
