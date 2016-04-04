@@ -95,6 +95,27 @@ All this work is based on the following assumptions:
 
     var app = angular.module('app', ['wt.responsive']);
 
+## Special cases
+
+### IE9 responsive hack
+
+Because IE9 doesn't handle correctly a `display` CSS rule for `<td>`, if you need to support it, you can use the following style, only for IE9:
+
+```css
+<!--[if IE 9]>
+<style>
+/* rules for IE9 only */
+.responsive {
+    overflow: hidden;
+}
+.responsive td:nth-child(odd), .responsive td:nth-child(even) {
+    float: left;
+    width: 100%;
+}
+</style>
+<![endif]-->
+```
+
 ## Credits
 
 CSS based on original work by Chris Coyier (http://css-tricks.com/responsive-data-tables/). In this article, he covers approaches to responsive tables. I modified it to work around CSS specificity and to keep things DRY.
