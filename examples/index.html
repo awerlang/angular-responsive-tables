@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../release/angular-responsive-tables.js"></script>
     <script src="controller.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="../release/angular-responsive-tables.css">
+    
+    <!--[if IE 9]>
+    <style>
+    /* rules for IE9 only */
+    .responsive {
+        overflow: hidden;
+    }
+    .responsive td:nth-child(odd), .responsive td:nth-child(even) {
+        float: left;
+        width: 100%;
+    }
+    </style>
+    <![endif]-->
 </head>
 <body ng-controller="TestController as ctrl">
     <h1>Angular Responsive Tables</h1>
