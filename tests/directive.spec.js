@@ -331,8 +331,8 @@ describe('directive', function () {
 		expect(styles.paddingLeft).toBe('50%');
 	});
 
-	describe('wt-responsive-column', function () {
-		it('supports ng-if applied on TD', function () {
+	describe('responsive-dynamic', function () {
+		it('supports ng-if applied on all TDs', function () {
 			var markup = [
 				'<table wt-responsive-table>',
 				'    <thead>',
@@ -358,6 +358,38 @@ describe('directive', function () {
 			var els = element.find('tbody tr:first td');
 			expect(els.eq(0).text()).toBe('jerry');
 			expect(els.eq(0).attr('data-title')).toBe('column');
+		});
+
+		it('supports ng-if applied on some TDs', function () {
+			var markup = [
+				'<table wt-responsive-table>',
+				'    <thead>',
+				'        <tr>',
+				'            <th>column</th>',
+                '            <th>simple</th>',
+				'        </tr>',
+				'    </thead>',
+				'    <tbody>',
+				'        <tr>',
+				'            <td ng-if="!condition" responsive-dynamic>tom</td>',
+				'            <td ng-if="condition" responsive-dynamic>jerry</td>',
+				'            <td>simple</td>',
+				'        </tr>',
+				'    </tbody>',
+				'</table>'
+			].join('');
+			var element = angular.element(markup);
+			var scope = $rootScope.$new();
+			scope.condition = true;
+
+			$compile(element)(scope);
+			scope.$digest();
+
+			var els = element.find('tbody tr:first td');
+			expect(els.eq(0).text()).toBe('jerry');
+			expect(els.eq(0).attr('data-title')).toBe('column');
+			expect(els.eq(1).text()).toBe('simple');
+			expect(els.eq(1).attr('data-title')).toBe('simple');
 		});
 
 	});
