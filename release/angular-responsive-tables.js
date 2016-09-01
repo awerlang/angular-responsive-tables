@@ -6,8 +6,9 @@
     }
     function updateTitle(td, th) {
         var title = th && th.textContent;
-        if (title && !td.getAttributeNode("data-title")) {
+        if (title && (td.getAttributeNode("data-title-override") || !td.getAttributeNode("data-title"))) {
             td.setAttribute("data-title", title);
+            td.setAttribute("data-title-override", title);
         }
     }
     function colspan(td) {
@@ -70,9 +71,10 @@
             restrict: "A",
             require: "^^wtResponsiveTable",
             link: function(scope, element, attrs, tableCtrl) {
-                var td = element[0];
-                var th = tableCtrl.getHeader(td);
-                updateTitle(td, th);
+                Array.prototype.forEach.call(element[0].parentElement.querySelectorAll("td"), function(td) {
+                    var th = tableCtrl.getHeader(td);
+                    updateTitle(td, th);
+                });
             }
         };
     }
