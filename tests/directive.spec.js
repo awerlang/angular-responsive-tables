@@ -48,7 +48,7 @@ describe('directive', function () {
 		expect(headerRow.is(':offscreen')).toBe(true);
 	});
 
-	it('supports rows with no <thead>', function () {
+	it('supports rows with no <thead>', function (done) {
 		var markup = [
 		    '<table wt-responsive-table>',
 	    '        <tr>',
@@ -67,22 +67,29 @@ describe('directive', function () {
 		].join('');
 		var element = angular.element(markup);
 		document.body.appendChild(element[0]);
-		$compile(element);
 
-		var firstDataRow = element.find('tr td');
-		expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
-		expect(firstDataRow.eq(1).attr('data-title')).toBe('Second title');
-		expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
-		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
+		var scope = $rootScope.$new();
+		$compile(element)(scope);
+		scope.$digest();
 
-		var headerRow = element.find('tr th');
-		expect(headerRow.eq(0).attr('data-title')).toBeUndefined();
-		expect(headerRow.eq(1).attr('data-title')).toBeUndefined();
-		expect(headerRow.eq(2).attr('data-title')).toBeUndefined();
-		expect(headerRow.eq(3).attr('data-title')).toBeUndefined();
+		setTimeout(function () {
+			var firstDataRow = element.find('tr td');
+			expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
+			expect(firstDataRow.eq(1).attr('data-title')).toBe('Second title');
+			expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
+			expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
+
+			var headerRow = element.find('tr th');
+			expect(headerRow.eq(0).attr('data-title')).toBeUndefined();
+			expect(headerRow.eq(1).attr('data-title')).toBeUndefined();
+			expect(headerRow.eq(2).attr('data-title')).toBeUndefined();
+			expect(headerRow.eq(3).attr('data-title')).toBeUndefined();
+
+			done();
+		}, 0);
 	});
 
-	it('supports <th> as first column of each <tr>', function () {
+	it('supports <th> as first column of each <tr>', function (done) {
 		var markup = [
 		    '<table wt-responsive-table>',
 	    '        <tr>',
@@ -105,22 +112,29 @@ describe('directive', function () {
 		].join('');
 		var element = angular.element(markup);
 		document.body.appendChild(element[0]);
-		$compile(element);
 
-		var firstDataRow = element.find('tr td');
-		expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
-		expect(firstDataRow.eq(1).attr('data-title')).toBe('Second title');
-		expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
-		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
+		var scope = $rootScope.$new();
+		$compile(element)(scope);
+		scope.$digest();
 
-		var headerRow = element.find('tr th');
-		expect(headerRow.eq(0).attr('data-title')).toBeUndefined();
-		expect(headerRow.eq(1).attr('data-title')).toBeUndefined();
-		expect(headerRow.eq(2).attr('data-title')).toBeUndefined();
-		expect(headerRow.eq(3).attr('data-title')).toBeUndefined();
+		setTimeout(function() {
+			var firstDataRow = element.find('tr td');
+			expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
+			expect(firstDataRow.eq(1).attr('data-title')).toBe('Second title');
+			expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
+			expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
+
+			var headerRow = element.find('tr th');
+			expect(headerRow.eq(0).attr('data-title')).toBeUndefined();
+			expect(headerRow.eq(1).attr('data-title')).toBeUndefined();
+			expect(headerRow.eq(2).attr('data-title')).toBeUndefined();
+			expect(headerRow.eq(3).attr('data-title')).toBeUndefined();
+
+			done();
+		}, 0);
 	});
 
-	it('supports colspan', function () {
+	it('supports colspan', function (done) {
 		var markup = [
 		    '<table wt-responsive-table>',
 		    '    <thead>',
@@ -150,13 +164,18 @@ describe('directive', function () {
 		var firstDataRow = element.find('tbody tr:first td');
 		expect(firstDataRow.attr('data-title')).toBeUndefined();
 
-		$compile(element);
+		var scope = $rootScope.$new();
+		$compile(element)(scope);
+		scope.$digest();
 
-		expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
-		expect(firstDataRow.eq(1).attr('data-title')).toBe('Forth title');
+		setTimeout(function () {
+			expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
+			expect(firstDataRow.eq(1).attr('data-title')).toBe('Forth title');
+			done();
+		}, 0);
 	});
 
-	it('support tables with multiple static rows', function () {
+	it('support tables with multiple static rows', function (done) {
 		var markup = [
 		    '<table wt-responsive-table>',
 		    '    <thead>',
@@ -187,17 +206,22 @@ describe('directive', function () {
 
 		var rows = element.find('tbody tr');
 
-		$compile(element);
+		var scope = $rootScope.$new();
+		$compile(element)(scope);
+		scope.$digest();
 
-		rows.each(function (index, element) {
-			var titles = Array.prototype.map.call(element.querySelectorAll('td'), function (item) {
-				return item.getAttribute('data-title');
+		setTimeout(function () {
+			rows.each(function (index, element) {
+				var titles = Array.prototype.map.call(element.querySelectorAll('td'), function (item) {
+					return item.getAttribute('data-title');
+				});
+				expect(titles).toEqual(['First title', 'Second title', 'Third title', 'Forth title']);
 			});
-			expect(titles).toEqual(['First title', 'Second title', 'Third title', 'Forth title']);
-		});
+			done();
+		}, 0);
 	});
 
-	it('supports ng-repeat applied on TR', function () {
+	it('supports ng-repeat applied on TR', function (done) {
 		var markup = [
 		    '<table wt-responsive-table>',
 		    '    <thead>',
@@ -222,15 +246,19 @@ describe('directive', function () {
 		var scope = $rootScope.$new();
 		scope.rows = [0, 1];
 
-		var firstDataRow = element.find('tbody tr:first td');
-		expect(firstDataRow.attr('data-title')).toBeUndefined();
-
 		$compile(element)(scope);
+		scope.$digest();
 
-		expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
-		expect(firstDataRow.eq(1).attr('data-title')).toBe('Second title');
-		expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
-		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
+		setTimeout(function () {
+			var firstDataRow = element.find('tbody tr:first td');
+
+			expect(firstDataRow.eq(0).attr('data-title')).toBe('First title');
+			expect(firstDataRow.eq(1).attr('data-title')).toBe('Second title');
+			expect(firstDataRow.eq(2).attr('data-title')).toBe('Third title');
+			expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
+
+			done();
+		}, 0);
 	});
 
 	it('supports ng-repeat applied on TH', function (done) {
@@ -332,7 +360,7 @@ describe('directive', function () {
 	});
 
 	describe('responsive-dynamic', function () {
-		it('supports ng-if applied on all TDs', function () {
+		it('supports ng-if applied on all TDs', function (done) {
 			var markup = [
 				'<table wt-responsive-table>',
 				'    <thead>',
@@ -342,8 +370,8 @@ describe('directive', function () {
 				'    </thead>',
 				'    <tbody>',
 				'        <tr>',
-				'            <td ng-if="!condition" responsive-dynamic>tom</td>',
-				'            <td ng-if="condition" responsive-dynamic>jerry</td>',
+				'            <td ng-if="!condition">tom</td>',
+				'            <td ng-if="condition">jerry</td>',
 				'        </tr>',
 				'    </tbody>',
 				'</table>'
@@ -356,11 +384,14 @@ describe('directive', function () {
 			scope.$digest();
 
 			var els = element.find('tbody tr:first td');
-			expect(els.eq(0).text()).toBe('jerry');
-			expect(els.eq(0).attr('data-title')).toBe('column');
+			setTimeout(function () {
+				expect(els.eq(0).text()).toBe('jerry');
+				expect(els.eq(0).attr('data-title')).toBe('column');
+				done();
+			}, 0);
 		});
 
-		it('supports ng-if applied on some TDs', function () {
+		it('supports ng-if applied on some TDs', function (done) {
 			var markup = [
 				'<table wt-responsive-table>',
 				'    <thead>',
@@ -371,8 +402,8 @@ describe('directive', function () {
 				'    </thead>',
 				'    <tbody>',
 				'        <tr>',
-				'            <td ng-if="!condition" responsive-dynamic>tom</td>',
-				'            <td ng-if="condition" responsive-dynamic>jerry</td>',
+				'            <td ng-if="!condition">tom</td>',
+				'            <td ng-if="condition">jerry</td>',
 				'            <td>simple</td>',
 				'        </tr>',
 				'    </tbody>',
@@ -386,10 +417,13 @@ describe('directive', function () {
 			scope.$digest();
 
 			var els = element.find('tbody tr:first td');
-			expect(els.eq(0).text()).toBe('jerry');
-			expect(els.eq(0).attr('data-title')).toBe('column');
-			expect(els.eq(1).text()).toBe('simple');
-			expect(els.eq(1).attr('data-title')).toBe('simple');
+			setTimeout(function () {
+				expect(els.eq(0).text()).toBe('jerry');
+				expect(els.eq(0).attr('data-title')).toBe('column');
+				expect(els.eq(1).text()).toBe('simple');
+				expect(els.eq(1).attr('data-title')).toBe('simple');
+				done();
+			}, 0);
 		});
 
 	});

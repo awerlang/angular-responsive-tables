@@ -2,4 +2,4 @@
 
 angular.module('wt.responsive', [])
     .directive('wtResponsiveTable', [wtResponsiveTable])
-    .directive('responsiveDynamic', [wtResponsiveDynamic]);
+    .directive('td', [wtResponsiveDynamic]);
