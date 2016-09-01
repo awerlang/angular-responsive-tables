@@ -14,7 +14,7 @@ function updateTitle(td, th) {
 function colspan(td) {
     var colspan = td.getAttributeNode('colspan');
     return colspan ? parseInt(colspan.value) : 1;
-} 
+}
 
 function wtResponsiveTable() {
     return {
@@ -25,7 +25,7 @@ function wtResponsiveTable() {
                     var headers = getHeaders($element[0]);
                     if (headers.length) {
                         var row = td.parentElement;
-                        var headerIndex = 0; 
+                        var headerIndex = 0;
                         var found = Array.prototype.some.call(row.querySelectorAll('td'), function (value, index) {
                             if (value === td) {
                                 return true;
@@ -40,21 +40,33 @@ function wtResponsiveTable() {
             }
         },
         compile: function (element, attrs) {
-            attrs.$addClass('responsive');
-            var headers = getHeaders(element[0]);
-            if (headers.length) {
-                var rows = element[0].querySelectorAll('tbody > tr');
-                Array.prototype.forEach.call(rows, function(row) {
-                    var headerIndex = 0; 
-                    Array.prototype.forEach.call(row.querySelectorAll('td'), function (value, index) {
-                        if (!value.getAttributeNode('responsive-dynamic')) {
-                            var th = value.parentElement.querySelector('th') || headers.item(headerIndex);
-                            updateTitle(value, th); 
-                        }
+            function apply() {
+                var headers = getHeaders(element[0]);
+                if (headers.length) {
+                    var rows = element[0].querySelectorAll('tbody > tr');
+                    Array.prototype.forEach.call(rows, function(row) {
+                        var headerIndex = 0;
+                        Array.prototype.forEach.call(row.querySelectorAll('td'), function (value, index) {
+                            if (!value.getAttributeNode('responsive-dynamic')) {
+                                var th = value.parentElement.querySelector('th') || headers.item(headerIndex);
+                                updateTitle(value, th);
+                            }
 
-                        headerIndex += colspan(value);
+                            headerIndex += colspan(value);
+                        });
                     });
-                });
+                }
+            }
+
+            attrs.$addClass('responsive');
+            if (Array.prototype.some.call(element.find('th'), function (it) {
+                return it.getAttributeNode('ng-repeat') || it.getAttributeNode('data-ng-repeat')
+            })) {
+                setTimeout(function () {
+                    apply();
+                }, 0);
+            } else {
+                apply();
             }
         }
     };
@@ -66,7 +78,7 @@ function wtResponsiveDynamic() {
         require: '^^wtResponsiveTable',
         link: function (scope, element, attrs, tableCtrl) {
             var td = element[0];
-            var th = tableCtrl.getHeader(td); 
+            var th = tableCtrl.getHeader(td);
             updateTitle(td, th);
         }
     };

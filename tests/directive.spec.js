@@ -233,6 +233,41 @@ describe('directive', function () {
 		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
 	});
 
+	it('supports ng-repeat applied on TH', function (done) {
+		var markup = [
+		    '<table wt-responsive-table>',
+		    '    <thead>',
+		    '        <tr>',
+		    '            <th ng-repeat="header in headers">{{header}}</th>',
+		    '        </tr>',
+		    '    </thead>',
+		    '    <tbody>',
+		    '        <tr>',
+		    '            <td>Column 1 - Content</td>',
+		    '            <td>Column 2 - Content</td>',
+		    '        </tr>',
+		    '    </tbody>',
+		    '</table>'
+		].join('');
+		var element = angular.element(markup);
+		var scope = $rootScope.$new();
+		scope.headers = ['Column 1', 'Column 2'];
+
+		$compile(element)(scope);
+		scope.$digest();
+
+		var firstDataRow = element.find('tbody tr:first td');
+
+		setTimeout(() => {
+			expect(firstDataRow.eq(0).attr('data-title')).toBe('Column 1');
+			expect(firstDataRow.eq(0).text()).toBe('Column 1 - Content');
+			expect(firstDataRow.eq(1).attr('data-title')).toBe('Column 2');
+			expect(firstDataRow.eq(1).text()).toBe('Column 2 - Content');
+
+			done();
+		}, 0);
+	});
+
 	it('supports ng-if applied on TD with data-title', function () {
 		var markup = [
 		    '<table wt-responsive-table>',

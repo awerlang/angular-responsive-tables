@@ -30,7 +30,8 @@ All this work is based on the following assumptions:
 * Angular native implementation compatible with 1.3.4+;
 * Keep things DRY;
 * Supports static and dynamic (ng-repeat) rows;
-* Support conditionally shown (ng-if) columns;
+* Supports conditionally shown (ng-if) columns;
+* Supports dynamic headers (ng-repeat);
 * Easy to apply any style on top of it;
 * Works with any base CSS framework; 
 * Should integrate seamlessly with any table component you might choose to use.
@@ -107,8 +108,7 @@ It's possible to override a header with a `data-title` attribute:
     <tr>
         <td data-title="column 1">tom</td>
         <td data-title="column 2">jerry</td>
-    </tr> 
-
+    </tr>
 
 ### Column can be shown/hidden with ng-if
 
@@ -117,7 +117,12 @@ Also, more than one `td` exist for a single `th`...to deal with this add a `resp
     <tr>
         <td ng-if="condition" responsive-dynamic>tom</td>
         <td ng-if="!condition" responsive-dynamic>jerry</td>
-    </tr> 
+    </tr>
+
+### Changes to header text doesn't reflect in responsive mode
+
+This is by design. To avoid expensive digest cycles only the content from the first digest cycle is used. 
+There are no watches being setup.
 
 ### IE9 responsive hack
 
