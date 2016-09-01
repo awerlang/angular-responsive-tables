@@ -233,6 +233,34 @@ describe('directive', function () {
 		expect(firstDataRow.eq(3).attr('data-title')).toBe('Forth title');
 	});
 
+	it('supports ng-if applied on TD with data-title', function () {
+		var markup = [
+		    '<table wt-responsive-table>',
+		    '    <thead>',
+		    '        <tr>',
+		    '            <th>column</th>',
+		    '        </tr>',
+		    '    </thead>',
+		    '    <tbody>',
+		    '        <tr>',
+		    '            <td ng-if="!condition">tom</td>',
+		    '            <td ng-if="condition" data-title="column">jerry</td>',
+		    '        </tr>',
+		    '    </tbody>',
+		    '</table>'
+		].join('');
+		var element = angular.element(markup);
+		var scope = $rootScope.$new();
+		scope.condition = true;
+
+		var firstDataRow = element.find('tbody tr:first td');
+
+		$compile(element)(scope);
+
+		expect(firstDataRow.eq(1).text()).toBe('jerry');
+		expect(firstDataRow.eq(1).attr('data-title')).toBe('column');
+	});
+
 	it('supports bootstrap', function () {
 		var markup = [
 		    '<table wt-responsive-table class="table" style="display: none;">',
