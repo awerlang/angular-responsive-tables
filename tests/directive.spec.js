@@ -295,4 +295,35 @@ describe('directive', function () {
 
 		expect(styles.paddingLeft).toBe('50%');
 	});
+
+	describe('wt-responsive-column', function () {
+		it('supports ng-if applied on TD', function () {
+			var markup = [
+				'<table wt-responsive-table>',
+				'    <thead>',
+				'        <tr>',
+				'            <th>column</th>',
+				'        </tr>',
+				'    </thead>',
+				'    <tbody>',
+				'        <tr>',
+				'            <td ng-if="!condition" responsive-dynamic>tom</td>',
+				'            <td ng-if="condition" responsive-dynamic>jerry</td>',
+				'        </tr>',
+				'    </tbody>',
+				'</table>'
+			].join('');
+			var element = angular.element(markup);
+			var scope = $rootScope.$new();
+			scope.condition = true;
+
+			$compile(element)(scope);
+			scope.$digest();
+
+			var els = element.find('tbody tr:first td');
+			expect(els.eq(0).text()).toBe('jerry');
+			expect(els.eq(0).attr('data-title')).toBe('column');
+		});
+
+	});
 });

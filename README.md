@@ -30,6 +30,7 @@ All this work is based on the following assumptions:
 * Angular native implementation compatible with 1.3.4+;
 * Keep things DRY;
 * Supports static and dynamic (ng-repeat) rows;
+* Support conditionally shown (ng-if) columns;
 * Easy to apply any style on top of it;
 * Works with any base CSS framework; 
 * Should integrate seamlessly with any table component you might choose to use.
@@ -77,6 +78,7 @@ All this work is based on the following assumptions:
  * table: wt-responsive-table
    * td: responsive-omit-title: title should be ommited
    * td: responsive-omit-if-empty: no row for empty cells
+   * td: responsive-dynamic: add it when there's an `ng-if` directive applied to the element
 
 ## Installation
 
@@ -96,6 +98,15 @@ All this work is based on the following assumptions:
     var app = angular.module('app', ['wt.responsive']);
 
 ## Special cases
+
+### Column can be shown/hidden with ng-if
+
+Also, more than one `td` exist for a single `th`...to deal with this add a `responsive-dynamic` attribute:
+
+    <tr>
+        <td ng-if="condition" responsive-dynamic>tom</td>
+        <td ng-if="!condition" responsive-dynamic>jerry</td>
+    </tr> 
 
 ### IE9 responsive hack
 
