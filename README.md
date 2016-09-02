@@ -79,7 +79,6 @@ All this work is based on the following assumptions:
  * table: wt-responsive-table
    * td: responsive-omit-title: title should be ommited
    * td: responsive-omit-if-empty: no row for empty cells
-   * td: responsive-dynamic: add it when there's an `ng-if` directive applied to the element
    * td: data-title: use to override the header for a given row/cell 
 
 ## Installation
@@ -108,15 +107,6 @@ It's possible to override a header with a `data-title` attribute:
     <tr>
         <td data-title="column 1">tom</td>
         <td data-title="column 2">jerry</td>
-    </tr>
-
-### Column can be shown/hidden with ng-if
-
-Also, more than one `td` exist for a single `th`...to deal with this add a `responsive-dynamic` attribute:
-
-    <tr>
-        <td ng-if="condition" responsive-dynamic>tom</td>
-        <td ng-if="!condition" responsive-dynamic>jerry</td>
     </tr>
 
 ### Changes to header text doesn't reflect in responsive mode
