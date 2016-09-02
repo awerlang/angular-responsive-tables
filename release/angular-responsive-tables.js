@@ -21,6 +21,8 @@
             controller: function($element) {
                 return {
                     getHeader: function(td) {
+                        var firstHeader = td.parentElement.querySelector("th");
+                        if (firstHeader) return firstHeader;
                         var headers = getHeaders($element[0]);
                         if (headers.length) {
                             var row = td.parentElement;
@@ -37,47 +39,36 @@
                 };
             },
             compile: function(element, attrs) {
-                function apply() {
-                    var headers = getHeaders(element[0]);
-                    if (headers.length) {
-                        var rows = element[0].querySelectorAll("tbody > tr");
-                        Array.prototype.forEach.call(rows, function(row) {
-                            var headerIndex = 0;
-                            Array.prototype.forEach.call(row.querySelectorAll("td"), function(value, index) {
-                                if (!value.getAttributeNode("responsive-dynamic")) {
-                                    var th = value.parentElement.querySelector("th") || headers.item(headerIndex);
-                                    updateTitle(value, th);
-                                }
-                                headerIndex += colspan(value);
-                            });
-                        });
-                    }
-                }
                 attrs.$addClass("responsive");
-                if (Array.prototype.some.call(element.find("th"), function(it) {
-                    return it.getAttributeNode("ng-repeat") || it.getAttributeNode("data-ng-repeat");
-                })) {
-                    setTimeout(function() {
-                        apply();
-                    }, 0);
-                } else {
-                    apply();
+                var headers = getHeaders(element[0]);
+                if (headers.length) {
+                    var rows = element[0].querySelectorAll("tbody > tr");
+                    Array.prototype.forEach.call(rows, function(row) {
+                        var headerIndex = 0;
+                        Array.prototype.forEach.call(row.querySelectorAll("td"), function(value, index) {
+                            var th = value.parentElement.querySelector("th") || headers.item(headerIndex);
+                            updateTitle(value, th);
+                            headerIndex += colspan(value);
+                        });
+                    });
                 }
             }
         };
     }
     function wtResponsiveDynamic() {
         return {
-            restrict: "A",
+            restrict: "E",
             require: "^^wtResponsiveTable",
             link: function(scope, element, attrs, tableCtrl) {
-                Array.prototype.forEach.call(element[0].parentElement.querySelectorAll("td"), function(td) {
-                    var th = tableCtrl.getHeader(td);
-                    updateTitle(td, th);
-                });
+                setTimeout(function() {
+                    Array.prototype.forEach.call(element[0].parentElement.querySelectorAll("td"), function(td) {
+                        var th = tableCtrl.getHeader(td);
+                        updateTitle(td, th);
+                    });
+                }, 0);
             }
         };
     }
     "use strict";
-    angular.module("wt.responsive", []).directive("wtResponsiveTable", [ wtResponsiveTable ]).directive("responsiveDynamic", [ wtResponsiveDynamic ]);
+    angular.module("wt.responsive", []).directive("wtResponsiveTable", [ wtResponsiveTable ]).directive("td", [ wtResponsiveDynamic ]);
 })();
