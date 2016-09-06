@@ -360,6 +360,37 @@ describe('directive', function () {
 	});
 
 	describe('responsive-dynamic', function () {
+
+		it('TDs are handled only on tables with wt-responsive-table', function (done) {
+			var markup = [
+				'<table>',
+				'    <thead>',
+				'        <tr>',
+				'            <th>column</th>',
+                '            <th>simple</th>',
+				'        </tr>',
+				'    </thead>',
+				'    <tbody>',
+				'        <tr>',
+				'            <td>jerry</td>',
+				'            <td>tom</td>',
+				'        </tr>',
+				'    </tbody>',
+				'</table>'
+			].join('');
+			var element = angular.element(markup);
+			var scope = $rootScope.$new();
+			$compile(element)(scope);
+			scope.$digest();
+
+			var els = element.find('tbody tr:first td');
+			setTimeout(function () {
+				expect(els.attr('data-title')).toBeUndefined();
+				done();
+			}, 0);
+		});
+
+
 		it('supports ng-if applied on all TDs', function (done) {
 			var markup = [
 				'<table wt-responsive-table>',

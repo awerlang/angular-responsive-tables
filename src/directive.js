@@ -65,8 +65,10 @@ function wtResponsiveTable() {
 function wtResponsiveDynamic() {
     return {
         restrict: 'E',
-        require: '^^wtResponsiveTable',
+        require: '?^^wtResponsiveTable',
         link: function (scope, element, attrs, tableCtrl) {
+            if (!tableCtrl) return;
+
             setTimeout(function () {
                 Array.prototype.forEach.call(element[0].parentElement.querySelectorAll("td"), function (td) {
                     var th = tableCtrl.getHeader(td);
