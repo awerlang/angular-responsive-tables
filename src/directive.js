@@ -20,7 +20,7 @@ function colspan(td) {
 function wtResponsiveTable() {
     return {
         restrict: 'A',
-        controller: function ($element) {
+        controller: ['$element', function ($element) {
             return {
                 getHeader: function (td) {
                     var firstHeader = td.parentElement.querySelector('th');
@@ -42,7 +42,7 @@ function wtResponsiveTable() {
                     }
                 },
             }
-        },
+        }],
         compile: function (element, attrs) {
             attrs.$addClass('responsive');
             var headers = getHeaders(element[0]);
