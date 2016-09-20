@@ -32,6 +32,7 @@ All this work is based on the following assumptions:
 * Supports static and dynamic (ng-repeat) rows;
 * Supports conditionally shown (ng-if) columns;
 * Supports dynamic headers (ng-repeat);
+* Supports nested tables (responsive or not in their own right);
 * Easy to apply any style on top of it;
 * Works with any base CSS framework; 
 * Should integrate seamlessly with any table component you might choose to use.
