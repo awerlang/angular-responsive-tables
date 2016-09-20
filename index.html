@@ -57,6 +57,9 @@ Compatible with <strong>AngularJS 1.3.4+</strong>. </p>
 <li>Angular native implementation compatible with 1.3.4+;</li>
 <li>Keep things DRY;</li>
 <li>Supports static and dynamic (ng-repeat) rows;</li>
+<li>Supports conditionally shown (ng-if) columns;</li>
+<li>Supports dynamic headers (ng-repeat);</li>
+<li>Supports nested tables (responsive or not in their own right);</li>
 <li>Easy to apply any style on top of it;</li>
 <li>Works with any base CSS framework; </li>
 <li>Should integrate seamlessly with any table component you might choose to use.</li>
@@ -115,6 +118,7 @@ Compatible with <strong>AngularJS 1.3.4+</strong>. </p>
 <ul>
 <li>td: responsive-omit-title: title should be ommited</li>
 <li>td: responsive-omit-if-empty: no row for empty cells</li>
+<li>td: data-title: use to override the header for a given row/cell </li>
 </ul>
 </li>
 </ul>
@@ -134,7 +138,7 @@ Compatible with <strong>AngularJS 1.3.4+</strong>. </p>
 <h4>
 <a id="html" class="anchor" href="#html" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HTML</h4>
 
-<pre><code>&lt;link rel="stylesheet" href="release/angular-responsive-tables.min.css"&gt;&lt;/script&gt;
+<pre><code>&lt;link rel="stylesheet" href="release/angular-responsive-tables.min.css"&gt;
 &lt;script type="text/javascript" src="release/angular-responsive-tables.min.js"&gt;&lt;/script&gt;
 </code></pre>
 
@@ -143,6 +147,44 @@ Compatible with <strong>AngularJS 1.3.4+</strong>. </p>
 
 <pre><code>var app = angular.module('app', ['wt.responsive']);
 </code></pre>
+
+<h2>
+<a id="special-cases" class="anchor" href="#special-cases" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Special cases</h2>
+
+<h3>
+<a id="header-doesnt-appear-for-a-row--need-to-override-header" class="anchor" href="#header-doesnt-appear-for-a-row--need-to-override-header" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Header doesn't appear for a row / need to override header</h3>
+
+<p>It's possible to override a header with a <code>data-title</code> attribute:</p>
+
+<pre><code>&lt;tr&gt;
+    &lt;td data-title="column 1"&gt;tom&lt;/td&gt;
+    &lt;td data-title="column 2"&gt;jerry&lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
+
+<h3>
+<a id="changes-to-header-text-doesnt-reflect-in-responsive-mode" class="anchor" href="#changes-to-header-text-doesnt-reflect-in-responsive-mode" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changes to header text doesn't reflect in responsive mode</h3>
+
+<p>This is by design. To avoid expensive digest cycles only the content from the first digest cycle is used. 
+There are no watches being setup.</p>
+
+<h3>
+<a id="ie9-responsive-hack" class="anchor" href="#ie9-responsive-hack" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IE9 responsive hack</h3>
+
+<p>Because IE9 doesn't handle correctly a <code>display</code> CSS rule for <code>&lt;td&gt;</code>, if you need to support it, you can use the following style, only for IE9:</p>
+
+<div class="highlight highlight-source-css"><pre>&lt;!--[if IE 9]&gt;
+&lt;<span class="pl-ent">style</span>&gt;
+<span class="pl-c">/* rules for IE9 only */</span>
+<span class="pl-e">.responsive</span> {
+    <span class="pl-c1"><span class="pl-c1">overflow</span></span>: <span class="pl-c1">hidden</span>;
+}
+<span class="pl-e">.responsive</span> <span class="pl-ent">td</span><span class="pl-e">:nth-child</span>(<span class="pl-c1">odd</span>), <span class="pl-e">.responsive</span> <span class="pl-ent">td</span><span class="pl-e">:nth-child</span>(<span class="pl-c1">even</span>) {
+    <span class="pl-c1"><span class="pl-c1">float</span></span>: <span class="pl-c1">left</span>;
+    <span class="pl-c1"><span class="pl-c1">width</span></span>: <span class="pl-c1">100<span class="pl-k">%</span></span>;
+}
+&lt;/<span class="pl-ent">style</span>&gt;
+&lt;![endif]--&gt;</pre></div>
 
 <h2>
 <a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
