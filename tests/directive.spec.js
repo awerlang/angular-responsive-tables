@@ -43,7 +43,7 @@ describe('directive', function () {
 		$compile(element);
 		$rootScope.$digest();
 
-		var headerRow = element.find('tr th');
+		var headerRow = element.find('th');
 		expect(headerRow.is(':visible')).toBe(true);
 		expect(headerRow.is(':offscreen')).toBe(true);
 	});
@@ -357,6 +357,70 @@ describe('directive', function () {
 		$rootScope.$digest();
 
 		expect(styles.paddingLeft).toBe('50%');
+		element.remove();
+	});
+
+	describe('nested tables', function () {
+
+		var element;
+		beforeEach(function () {
+			var markup = [
+				'<table wt-responsive-table>',
+				'    <thead>',
+				'        <tr>',
+				'            <th>First title</th>',
+				'            <th>Second title</th>',
+				'        </tr>',
+				'    </thead>',
+				'    <tbody>',
+				'        <tr>',
+				'            <td>First column</td>',
+				'            <td>',
+				'                <table>',
+				'                    <tr><th>nested title</th></tr>',
+				'                    <tr><td>nested table</td></tr>',
+				'                </table>',
+				'            </td>',
+				'        </tr>',
+				'    </tbody>',
+				'</table>'
+			].join('');
+			element = angular.element(markup);
+
+			var scope = $rootScope.$new();
+			$compile(element)(scope);
+			scope.$digest();
+		});
+
+		it('nested tables are ignored', function (done) {
+			var tds = element.find('table td');
+
+			setTimeout(function () {
+				var content = Array.prototype.map.call(tds, function (item) {
+					return item.textContent;
+				});
+				expect(content).toEqual(['nested table']);
+				var titles = Array.prototype.map.call(tds, function (item) {
+					return item.getAttribute('data-title');
+				});
+				expect(titles).toEqual([null]);
+				done();
+			}, 0);
+		});
+
+		it('nested tables does not match responsive CSS', function (done) {
+			setTimeout(function () {
+				angular.element("body").append(element);
+				var thStyles = getComputedStyle(element.find('table th')[0]);
+				expect(thStyles.position).toBe('static');
+				var tdStyles = getComputedStyle(element.find('table td')[0]);
+				expect(tdStyles.display).toBe('table-cell');
+				var pseudoElStyles = getComputedStyle(element.find('table td')[0], '::before');
+				expect(pseudoElStyles.position).toBe('static');
+				element.remove();
+				done();
+			}, 100);
+		});
 	});
 
 	describe('responsive-dynamic', function () {

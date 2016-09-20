@@ -2,6 +2,7 @@
 <html ng-app="app">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../release/angular-responsive-tables.js"></script>
     <script src="controller.js"></script>
@@ -229,5 +230,54 @@
             <td>{{item.stars}}</td>
         </tr>
     </table>
+
+    <h2>Nested tables</h2>
+
+    <h3>Non-responsive nested table</h3>
+    <table wt-responsive-table>
+        <thead>
+            <tr>
+                <th>First title</th>
+                <th>Second title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>First column</td>
+                <td>
+                    <table border=1>
+                        <tr>
+                            <th>nested title</th>
+                            <td>nested table</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Responsive nested table</h3>
+    <table wt-responsive-table>
+        <thead>
+            <tr>
+                <th>First title</th>
+                <th>Second title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>First column</td>
+                <td>
+                    <table wt-responsive-table>
+                        <tr>
+                            <th>nested title</th>
+                            <td>nested table</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>

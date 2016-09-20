@@ -9,25 +9,25 @@
 
     /* Force table to not be like tables anymore */
     /* table.responsive,*/
-    .responsive thead,
-    .responsive tbody,
-    .responsive tr,
-    .responsive th {
+    .responsive > thead,
+    .responsive > tbody,
+    .responsive > tbody > tr,
+    .responsive > thead > th {
         display: block;
     }
 
     /* Hide table headers (but not display: none;, for accessibility) */
-    .responsive thead tr, .responsive th {
+    .responsive > thead > tr, .responsive > thead > tr > th, .responsive > tbody > tr > th {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
 
-    .responsive tr {
+    .responsive > tbody > tr {
         border: 1px solid #ccc;
     }
 
-    .responsive td:nth-child(odd), .responsive td:nth-child(even) {
+    .responsive > tbody > tr > td {
         /* Behave  like a "row" */
         border: none;
         border-bottom: 1px solid #eee;
@@ -43,7 +43,7 @@
         min-height: 1em;
     }
 
-    .responsive td:nth-child(odd)::before, .responsive td:nth-child(even)::before {
+    .responsive > tbody > tr > td::before {
         /* Now like a table header */
         position: absolute;
         /* Top/left values mimic padding */
