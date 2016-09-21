@@ -17,7 +17,9 @@
     }
 
     /* Hide table headers (but not display: none;, for accessibility) */
-    .responsive > thead > tr, .responsive > thead > tr > th, .responsive > tbody > tr > th {
+    .responsive > thead > tr, 
+    .responsive > thead > tr > th, 
+    .responsive > tbody > tr > th {
         position: absolute;
         top: -9999px;
         left: -9999px;
@@ -32,7 +34,7 @@
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 50%;
+        padding-left: 50% !important;
         white-space: normal;
         text-align: left;
 
