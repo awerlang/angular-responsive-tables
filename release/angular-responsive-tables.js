@@ -20,13 +20,13 @@
     }
     function updateTitle(td, th) {
         var title = th && th.textContent;
-        if (title && (td.getAttributeNode("data-title-override") || !td.getAttributeNode("data-title"))) {
+        if (title && (td.getAttribute("data-title-override") || !td.getAttribute("data-title"))) {
             td.setAttribute("data-title", title);
             td.setAttribute("data-title-override", title);
         }
     }
     function colspan(td) {
-        var colspan = td.getAttributeNode("colspan");
+        var colspan = td.getAttribute("colspan");
         return colspan ? parseInt(colspan.value) : 1;
     }
     function wtResponsiveTable() {
