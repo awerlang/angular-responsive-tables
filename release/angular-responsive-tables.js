@@ -33,7 +33,7 @@
         return {
             restrict: "A",
             controller: [ "$element", function($element) {
-                return {
+                angular.extend(this, {
                     contains: function(td) {
                         var tableEl = $element[0];
                         var el = td;
@@ -61,7 +61,7 @@
                             return found ? headers[headerIndex] : null;
                         }
                     }
-                };
+                });
             } ],
             compile: function(element, attrs) {
                 attrs.$addClass("responsive");
