@@ -36,7 +36,7 @@ function wtResponsiveTable() {
     return {
         restrict: 'A',
         controller: ['$element', function ($element) {
-            return {
+            angular.extend(this, {
                 contains: function (td) {
                     var tableEl = $element[0];
                     var el = td;
@@ -69,7 +69,7 @@ function wtResponsiveTable() {
                         return found ? headers[headerIndex] : null;
                     }
                 },
-            }
+            });
         }],
         compile: function (element, attrs) {
             attrs.$addClass('responsive');
