@@ -21,15 +21,15 @@ function getHeaders(element) {
 
 function updateTitle(td, th) {
     var title = th && th.textContent;
-    if (title && (td.getAttributeNode('data-title-override') || !td.getAttributeNode('data-title'))) {
+    if (title && (td.getAttribute('data-title-override') || !td.getAttribute('data-title'))) {
         td.setAttribute('data-title', title);
         td.setAttribute('data-title-override', title);
     }
 }
 
 function colspan(td) {
-    var colspan = td.getAttributeNode('colspan');
-    return colspan ? parseInt(colspan.value) : 1;
+    var colspan = td.getAttribute('colspan');
+    return colspan ? parseInt(colspan) : 1;
 }
 
 function wtResponsiveTable() {
@@ -51,7 +51,7 @@ function wtResponsiveTable() {
 
                 getHeader: function (td) {
                     var firstHeader = getFirstHeaderInRow(td.parentElement);
-                    if (firstHeader) return firstHeader; 
+                    if (firstHeader) return firstHeader;
 
                     var headers = getHeaders($element);
                     if (headers.length) {
