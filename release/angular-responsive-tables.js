@@ -64,7 +64,7 @@
                 });
             } ],
             compile: function(element, attrs) {
-                attrs.$addClass("responsive");
+                element.addClass("responsive");
                 var headers = getHeaders(element);
                 if (headers.length) {
                     var rows = [].filter.call(element.children(), function(it) {
