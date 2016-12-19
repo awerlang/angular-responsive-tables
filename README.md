@@ -113,7 +113,15 @@ It's possible to override a header with a `data-title` attribute:
 ### Changes to header text doesn't reflect in responsive mode
 
 This is by design. To avoid expensive digest cycles only the content from the first digest cycle is used. 
-There are no watches being setup.
+There are no watchers being setup.
+
+### Dynamic column names
+
+When loading column names with an asynchronous task, that is, column names are not available when first compiling the table element, rows in responsive mode won't have headers even after the task completes.
+
+To avoid this problem, use an `ng-if` to conditionally present the element on screen.
+
+    <table wt-responsive-table ng-if="columnNames && columnNames.length">
 
 ### IE9 responsive hack
 
