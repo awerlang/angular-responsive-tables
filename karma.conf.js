@@ -62,14 +62,14 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['mobile'],
-    
+
     customLaunchers: {
       mobile: {
-        base: "Chrome",
+        base: "ChromeHeadless",
         flags: ["--window-size=320,600"]
       },
       desktop: {
-        base: "Chrome"
+        base: "ChromeHeadless"
       }
     },
 
