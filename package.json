@@ -1,6 +1,6 @@
 {
   "name": "angular-responsive-tables",
-  "version": "0.1.3",
+  "version": "0.4.4",
   "description": "Make your HTML tables look great on every device",
   "main": "release/angular-responsive-tables.js",
   "files": [
