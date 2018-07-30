@@ -1,7 +1,7 @@
 # angular-responsive-tables
 
-Make your HTML tables look great on every device. 
-Compatible with **AngularJS 1.3.4+**. 
+Make your HTML tables look great on every device.
+Compatible with **AngularJS 1.3.4+**.
 
 [Live Demo](http://awerlang.github.io/angular-responsive-tables/examples/)
 
@@ -11,7 +11,7 @@ Currently, browsers for mobile devices like smartphones doesn't do anything to h
  and then scrollbars will show up and ruin your design.
 
 In the search of a solution to this problem I have found many different approaches. Some of them
- still rely on horizontal scrollbars. While I believe this layout could be useful for some use cases, 
+ still rely on horizontal scrollbars. While I believe this layout could be useful for some use cases,
  I felt that a default solution should avoid horizontal scrollbars entirely. Then I came up with this
  highly reusable directive.
 
@@ -34,7 +34,7 @@ All this work is based on the following assumptions:
 * Supports dynamic headers (ng-repeat);
 * Supports nested tables (responsive or not in their own right);
 * Easy to apply any style on top of it;
-* Works with any base CSS framework; 
+* Works with any base CSS framework;
 * Should integrate seamlessly with any table component you might choose to use.
 
 ### Future Work
@@ -42,7 +42,7 @@ All this work is based on the following assumptions:
 * Choose what columns to show/hide according to a given screen resolution;
 * Choose when it would be best to hide columns or collapse all columns;
 * Define a header and/or custom template for collapsed columns/row;
-* Allow collapse/expand column details. 
+* Allow collapse/expand column details.
 
 ## Usage
 
@@ -80,9 +80,13 @@ All this work is based on the following assumptions:
  * table: wt-responsive-table
    * td: responsive-omit-title: title should be ommited
    * td: responsive-omit-if-empty: no row for empty cells
-   * td: data-title: use to override the header for a given row/cell 
+   * td: data-title: use to override the header for a given row/cell
 
 ## Installation
+
+### npm
+
+    npm install --save angular-responsive-tables
 
 ### Bower
 
@@ -112,7 +116,7 @@ It's possible to override a header with a `data-title` attribute:
 
 ### Changes to header text doesn't reflect in responsive mode
 
-This is by design. To avoid expensive digest cycles only the content from the first digest cycle is used. 
+This is by design. To avoid expensive digest cycles only the content from the first digest cycle is used.
 There are no watchers being setup.
 
 ### Dynamic column names
