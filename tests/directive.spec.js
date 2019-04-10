@@ -4,7 +4,7 @@
 describe('directive', function () {
 	var $compile,
 		$rootScope;
-	
+
 	beforeEach(module('wt.responsive'));
 	beforeEach(inject(function (_$rootScope_, _$compile_) {
 		$compile = _$compile_;
@@ -347,11 +347,11 @@ describe('directive', function () {
 		].join('');
 		var element = angular.element(markup);
 		angular.element("body").append(element);
-		
+
 		var firstDataRow = element.find('tbody tr td');
-		
+
 		var styles = getComputedStyle(firstDataRow[0]);
-		expect(styles.paddingLeft).toBe('8px');
+		expect(styles.paddingLeft).toBe('12px');
 
 		$compile(element);
 		$rootScope.$digest();
